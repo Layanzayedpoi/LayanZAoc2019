@@ -31,6 +31,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if(v == buttonSignUp) {
+            if(editTextPassword.getText().equals(" ")|| editTextEmail.getText().toString().equals("")){
+                
+
+            }
             Intent i = new Intent(this, HomePageActivity.class);
             startActivity(i);
 
