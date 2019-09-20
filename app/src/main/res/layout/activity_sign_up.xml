@@ -9,16 +9,35 @@
     tools:context=".SignUpActivity">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:text="Welcome To Blink " />
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="Welcome To Blink"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Sign Up Here:"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="315dp"
+        android:layout_height="61dp"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="username"
+        android:inputType="textEmailAddress"
+        android:padding="25dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="320dp"
         android:layout_height="61dp"
-        android:layout_margin="12dp"
+        android:layout_margin="15dp"
         android:ems="10"
         android:hint="id "
         android:inputType="textPassword"
@@ -27,29 +46,20 @@
         android:paddingStart="25dp"
         android:paddingTop="25dp" />
 
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="320dp"
-        android:layout_height="61dp"
-        android:layout_margin="12dp"
-        android:ems="10"
-        android:hint="username"
-        android:inputType="textEmailAddress"
-        android:padding="25dp" />
-
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="168dp"
-        android:layout_height="55dp"
+        android:layout_height="58dp"
         android:layout_gravity="center"
-        android:layout_margin="15dp"
+        android:layout_margin="25dp"
         android:hint="SignUp" />
 
     <Button
         android:id="@+id/buttonLogIn"
         android:layout_width="168dp"
-        android:layout_height="55dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
+        android:layout_margin="15dp"
         android:hint="SignIn" />
 
 </LinearLayout>
