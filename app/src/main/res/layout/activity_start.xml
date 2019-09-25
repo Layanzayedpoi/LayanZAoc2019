@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="373dp"
-        tools:layout_editor_absoluteY="364dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-34dp">
 
         <TextView
             android:id="@+id/textViewHelloN"
@@ -26,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="55dp"
+            android:layout_marginTop="50dp"
             android:text="Start" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
