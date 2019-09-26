@@ -58,6 +58,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.moreinfo:
+                goToNextActivity = new Intent(getApplicationContext(), MoreInfoActivity.class);
+                startActivity(goToNextActivity);
+                break;
 
         }
         return true;

@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".PickUpActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/pickup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="25dp"
+            android:text="Pick Your Options"
+            android:textSize="40dp" />
+
+        <RadioButton
+            android:id="@+id/raedmessagesbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:text="Read My Messages"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/writemytextbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:text="Write My Texts"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/remindmebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:text="Remind Me"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/callforemergencybutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:text="Call For Emergency"
+            android:textSize="20dp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
