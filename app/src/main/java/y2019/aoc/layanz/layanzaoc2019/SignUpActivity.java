@@ -4,12 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public void getSpeechInput(View view){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+
+    }
 
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
@@ -54,4 +64,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
 }
