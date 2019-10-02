@@ -14,12 +14,7 @@ import java.util.Locale;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public void getSpeechInput(View view){
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
 
-    }
 
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
@@ -36,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonLogIn = findViewById(R.id.buttonLogIn);
         buttonLogIn.setOnClickListener(this);
         buttonSignUp = findViewById(R.id.buttonSignUp);
+        buttonSignUp.setOnClickListener(this);
 
     }
 
@@ -57,12 +53,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         }
         else{
-            Intent i = new Intent(this, HomePageActivity.class);
-            startActivity(i);
+            getSpeechInput(v);
+           /* Intent i = new Intent(this, HomePageActivity.class);
+            startActivity(i);*/
 
             }
 
 
+    }
+    public void getSpeechInput(View view){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, 10);
+        }else{
+            Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
