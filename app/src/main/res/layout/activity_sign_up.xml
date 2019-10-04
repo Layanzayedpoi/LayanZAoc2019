@@ -9,11 +9,13 @@
     tools:context=".SignUpActivity">
 
     <TextView
+        android:id="@+id/txvResult"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:gravity="center"
         android:text="Welcome To Blink"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        />
 
     <TextView
         android:id="@+id/textView2"
