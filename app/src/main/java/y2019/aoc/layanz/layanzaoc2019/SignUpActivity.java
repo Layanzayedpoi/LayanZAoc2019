@@ -3,6 +3,7 @@ package y2019.aoc.layanz.layanzaoc2019;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
@@ -76,9 +77,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Your Device Dont Support Speech Input", Toast.LENGTH_SHORT).show();
         }
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
+    
+    public void onActivityReenter(int requestCode ,int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+
+
+
+
+
         switch (requestCode) {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
@@ -93,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Thread.sleep(5000);
         getSpeechInput();
     }
-/*    public void getSpeechInput(View view){
+   public void getSpeechInput(View view){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -105,19 +112,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
+        switch (requestCode) {
             case 10:
-                if (resultCode == RESULT_OK && data !=null){
+                if (resultCode == RESULT_OK && data != null) {
                     String[] result = data.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS);
                     txvResult.setText(0);
 
-               }
+                }
 
                 break;
 
         }
-    }*/
-}
+    }
+    }
+
