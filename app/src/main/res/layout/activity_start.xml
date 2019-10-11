@@ -4,29 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="25dp"
     tools:context=".StartActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-34dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textViewHelloN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Hello"
+            android:text="Hello Name"
             android:textSize="50dp" />
 
         <Button
             android:id="@+id/buttonStart"
-            android:layout_width="match_parent"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
-            android:layout_margin="55dp"
-            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+
+            android:layout_marginTop="250dp"
+            android:padding="30dp"
             android:text="Start" />
 
     </LinearLayout>

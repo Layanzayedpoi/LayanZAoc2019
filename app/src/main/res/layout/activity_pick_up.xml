@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <TextView
             android:id="@+id/pickup"
@@ -53,5 +53,15 @@
             android:padding="25dp"
             android:text="Call For Emergency"
             android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/nextbottun"
+            android:layout_width="223dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Next" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

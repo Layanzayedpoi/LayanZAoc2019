@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +22,8 @@ import java.util.Locale;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
    private TextView txvResult;
+    TextToSpeech tts;
+    String text;
 
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
@@ -39,8 +43,37 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
 
-    }
+        tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
 
+            @Override
+            public void onInit(int status) {
+                // TODO Auto-generated method stub
+                if(status == TextToSpeech.SUCCESS){
+                    int result=tts.setLanguage(Locale.US);
+                    if(result==TextToSpeech.LANG_MISSING_DATA ||
+                            result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("error", "This Language is not supported");
+                    }
+                    else{
+                        ConvertTextToSpeech();
+                    }
+                }
+                else
+                    Log.e("error", "Initilization Failed!");
+            }
+        });
+
+    }
+    private void ConvertTextToSpeech() {
+        // TODO Auto-generated method stub
+        text = "Welcome To Blink";
+        if(text==null||"".equals(text))
+        {
+            text = "Content not available";
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }else
+            tts.speak(text+"is saved", TextToSpeech.QUEUE_FLUSH, null);
+    }
     @Override
     public void onClick(View v) {
         if(v == buttonSignUp) {
