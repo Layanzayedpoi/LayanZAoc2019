@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="25dp"
+    android:background="@drawable/bg5"
     tools:context=".StartActivity">
 
     <LinearLayout
@@ -18,6 +19,8 @@
             android:id="@+id/textViewHelloN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="serif"
             android:gravity="center"
             android:text="Hello Name"
             android:textSize="50dp" />
@@ -28,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
 
+            android:layout_margin="230dp"
             android:layout_marginTop="250dp"
             android:padding="30dp"
             android:text="Start" />

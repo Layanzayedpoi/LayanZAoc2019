@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
+    android:background="@drawable/bg5"
     tools:context=".SignUpActivity">
 
     <TextView
         android:id="@+id/txvResult"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:fontFamily="serif"
         android:gravity="center"
         android:text="Welcome To Blink"
         android:textSize="25dp"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView2"
@@ -31,7 +33,7 @@
         android:layout_height="61dp"
         android:layout_margin="15dp"
         android:ems="10"
-        android:hint="username"
+        android:hint="Your Name Is"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -40,7 +42,7 @@
         android:layout_height="61dp"
         android:layout_margin="15dp"
         android:ems="10"
-        android:hint="id "
+        android:hint="Your ID Number is"
         android:inputType="textPassword" />
 
     <Button
@@ -49,7 +51,8 @@
         android:layout_height="58dp"
         android:layout_gravity="center"
         android:layout_margin="25dp"
-        android:hint="SignUp" />
+        android:hint="SignUp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonLogIn"
@@ -57,6 +60,7 @@
         android:layout_height="65dp"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:hint="SignIn" />
+        android:hint="SignIn"
+        android:textStyle="bold" />
 
 </LinearLayout>

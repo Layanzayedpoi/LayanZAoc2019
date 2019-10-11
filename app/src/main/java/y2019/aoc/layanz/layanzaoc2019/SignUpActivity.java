@@ -21,6 +21,8 @@ import java.util.Locale;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+
    private TextView txvResult;
     TextToSpeech tts;
     String text;
@@ -42,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonLogIn.setOnClickListener(this);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
+
+
 
         tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
 
