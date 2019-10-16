@@ -20,6 +20,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     Button buttonStart;
     TextToSpeech tts;
     String text;
+    int i=0;
+    String[] arrStart= {"Hello Name", " Start Applcation"};
 
 
     @Override
@@ -54,7 +56,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     }
     private void ConvertTextToSpeech() {
         // TODO Auto-generated method stub
-        text = "Hello Name";
+        text = arrStart[i];
+        i++;
+        if(i == arrStart.length-1)
+            i=0;
         if(text==null||"".equals(text))
         {
             text = "Content not available";

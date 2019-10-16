@@ -3,7 +3,6 @@ package y2019.aoc.layanz.layanzaoc2019;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -14,8 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -23,9 +20,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-   private TextView txvResult;
+    private TextView tvWelcom;
     TextToSpeech tts;
     String text;
+    int i = 0;
+    String[] arrSignUp = {"Welcome To Blink for more info click upper side of screen","Let's Sign Up Here", "Your Name is", "Your ID Number is","Sign Up" };
 
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
@@ -34,7 +33,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        txvResult = (TextView) findViewById(R.id.txvResult);
+        tvWelcom = (TextView) findViewById(R.id.tvWelcom);
+        tvWelcom.setOnClickListener(this);
 
         //2. initial;ize properties
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -47,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
+
+
         tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
 
             @Override
@@ -56,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     int result=tts.setLanguage(Locale.US);
                     if(result==TextToSpeech.LANG_MISSING_DATA ||
                             result==TextToSpeech.LANG_NOT_SUPPORTED){
-                        Log.e("error", "This Language is not supported");
+                        Log.e("error", "This Language i-s not supported");
                     }
                     else{
                         ConvertTextToSpeech();
@@ -70,39 +72,76 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void ConvertTextToSpeech() {
         // TODO Auto-generated method stub
-        text = "Welcome To Blink";
+        text = arrSignUp[i];
+        i++;
+        if(i == arrSignUp.length - 1)
+            i=0;
         if(text==null||"".equals(text))
         {
             text = "Content not available";
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }else
-            tts.speak(text+"is saved", TextToSpeech.QUEUE_FLUSH, null);
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
     @Override
     public void onClick(View v) {
         if(v == buttonSignUp) {
             if(editTextPassword.getText().toString().equals(" ")|| editTextEmail.getText().toString().equals(""))
             {
-              Toast.makeText( this, "Empty Email or Password", Toast.LENGTH_LONG).show();
+                Toast.makeText( this, "Empty Email or Password", Toast.LENGTH_LONG).show();
             }
             else{
-
-                    Intent i = new Intent(this, MainActivity.class);
-                    i.putExtra("Email", editTextEmail.getText().toString());
-                    i.putExtra("Password", editTextPassword.getText().toString());
-                    startActivity(i);
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("Email", editTextEmail.getText().toString());
+                i.putExtra("Password", editTextPassword.getText().toString());
+                startActivity(i);
             }
 
-
+        }else if ( v == tvWelcom){
+            ConvertTextToSpeech();
         }
         else{
 
             Intent i = new Intent(this, HomePageActivity.class);
             startActivity(i);
+        }
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 10:
+                if (resultCode == RESULT_OK && data != null) {
+                    String[] result = data.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS);
+                    tvWelcom.setText(0);
+                }
+                break;
+        }
+    }
 
-            }
 
 
+
+
+
+
+
+
+
+    public void getSTT(View view) throws InterruptedException {
+        getSpeechInput();
+        Thread.sleep(5000);
+        getSpeechInput();
+    }
+    public void getSpeechInput(View view){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, 10);
+        }else{
+            Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
+        }
     }
     public void getSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -114,55 +153,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Your Device Dont Support Speech Input", Toast.LENGTH_SHORT).show();
         }
     }
-
-    
-    public void onActivityReenter(int requestCode ,int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-
-
-
-
-
-        switch (requestCode) {
-            case 10:
-                if (resultCode == RESULT_OK && data != null) {
-                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    txvResult.setText(result.get(0));
-                }
-                break;
-        }
-    }
-    public void getSTT(View view) throws InterruptedException {
-        getSpeechInput();
-        Thread.sleep(5000);
-        getSpeechInput();
-    }
-   public void getSpeechInput(View view){
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-
-        if(intent.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(intent, 10);
-        }else{
-            Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case 10:
-                if (resultCode == RESULT_OK && data != null) {
-                    String[] result = data.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS);
-                    txvResult.setText(0);
-
-                }
-
-                break;
-
-        }
-    }
-    }
+}
 
