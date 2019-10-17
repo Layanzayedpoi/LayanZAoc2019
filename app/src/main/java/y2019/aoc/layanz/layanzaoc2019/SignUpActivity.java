@@ -91,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText( this, "Empty Email or Password", Toast.LENGTH_LONG).show();
             }
             else{
-                Intent i = new Intent(this, MainActivity.class);
+                Intent i = new Intent(this, PickUpActivity.class);
                 i.putExtra("Email", editTextEmail.getText().toString());
                 i.putExtra("Password", editTextPassword.getText().toString());
                 startActivity(i);
@@ -100,11 +100,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else if ( v == tvWelcom){
             ConvertTextToSpeech();
         }
-        else{
+      //  else{
 
-            Intent i = new Intent(this, HomePageActivity.class);
-            startActivity(i);
-        }
+          //  Intent i = new Intent(this, HomePageActivity.class);
+          //  startActivity(i);
+        //}
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -117,6 +117,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+
+
+
 
 
 

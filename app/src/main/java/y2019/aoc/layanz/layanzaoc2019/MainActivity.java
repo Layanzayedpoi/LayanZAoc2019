@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
         String password = getIntent().getStringExtra("Password");
 
         String email = getIntent().getStringExtra("Email");
-/*
-        tvEmail = findViewById(R.id.tvEmail);
-        tvPassword =findViewById(R.id.tvPassword);
+
+        //tvEmail = findViewById(R.id.tvEmail);
+        //tvPassword =findViewById(R.id.tvPassword);
 
         tvEmail.setText(email);
-        tvPassword.setText(password);*/
+        tvPassword.setText(password);
 
 
     }

@@ -4,18 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
+import static android.widget.Toast.*;
+
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private RadioButton readB;
+    private RadioButton writeB;
+    private RadioButton remindB;
+    private RadioButton callB;
+    private Button NextB;
 
     TextToSpeech tts;
     TextView tvPickUp;
@@ -31,8 +40,16 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_up);
 
+
+
         tvPickUp= (TextView)findViewById(R.id.tvPickUp);
         tvPickUp.setOnClickListener(this);
+        readB = (RadioButton)findViewById(R.id.buttonreadmessages);
+        writeB = (RadioButton)findViewById(R.id.buttonwritemytext);
+        remindB =  (RadioButton)findViewById(R.id.buttonremindme);
+        callB = (RadioButton)findViewById(R.id.buttoncallforem);
+        NextB = (Button)findViewById(R.id.nextbottun);
+        NextB.setOnClickListener(this);//msh 3arfe eza s7
 
 
 
@@ -46,8 +63,22 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonremindme.setOnClickListener(this);
         buttonwritemytext = findViewById(R.id.buttonwritemytext);
         buttonwritemytext.setOnClickListener(this);
-        buttoncallforemergency = findViewById(R.id.buttoncallforemergencybutton);
+        buttoncallforemergency = findViewById(R.id.buttoncallforem);
         buttoncallforemergency.setOnClickListener(this);
+
+        int selectedId1 = readB.getId();
+        readB = (RadioButton)findViewById(selectedId1);
+        int selectedId2 = writeB.getId();
+        writeB = (RadioButton)findViewById(selectedId2);
+        int selectedId3 = remindB.getId();
+        remindB = (RadioButton)findViewById(selectedId3);
+        int selectedId4 = callB.getId();
+        callB = (RadioButton)findViewById(selectedId4);
+
+       // makeText(PickUpActivity.this,
+               // readB.getText(), remindB.getText(), callB.getText(), writeB.getText()Toast.LENGTH_SHORT).show();
+
+
 
 
         tts = new TextToSpeech(PickUpActivity.this, new TextToSpeech.OnInitListener() {
@@ -83,9 +114,16 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
 
+        public void onClickR(View v){
 
 
-    public void getSpeechInput(View view){
+        }
+
+
+
+
+
+            public void getSpeechInput(View view){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
