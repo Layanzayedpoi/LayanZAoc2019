@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
-    android:background="@drawable/bg5"
+    android:background="@drawable/bg7"
     tools:context=".SignUpActivity">
 
     <TextView

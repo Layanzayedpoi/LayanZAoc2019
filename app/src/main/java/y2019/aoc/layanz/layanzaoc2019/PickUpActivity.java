@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
-
-import static android.widget.Toast.*;
 
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,10 +27,11 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView tvPickUp;
     String text;
     int i =0;
-    String[] arrPickUp = {"Pick Up Yor Options", "Do You Want The App to", "Read Your Messages","Write Your Messages"," Remind You","Call For Emergency "};
+    String[] arrPickUp = {"Pick Up Yor Options To Know What The Opitions Are click upper side of screen", "Do You Want The App to", "Read Your Messages","Write Your Messages"," Remind You","Call For Emergency "};
 
 
     RadioButton buttonreadMyMessages, buttonwritemytext, buttonremindme, buttoncallforemergency;
+    Button nextbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         writeB = (RadioButton)findViewById(R.id.buttonwritemytext);
         remindB =  (RadioButton)findViewById(R.id.buttonremindme);
         callB = (RadioButton)findViewById(R.id.buttoncallforem);
-        NextB = (Button)findViewById(R.id.nextbottun);
+        NextB = (Button)findViewById(R.id.nextbutton);
         NextB.setOnClickListener(this);//msh 3arfe eza s7
 
 
@@ -65,6 +63,8 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonwritemytext.setOnClickListener(this);
         buttoncallforemergency = findViewById(R.id.buttoncallforem);
         buttoncallforemergency.setOnClickListener(this);
+        nextbutton = findViewById(R.id.nextbutton);
+        nextbutton.setOnClickListener(this);
 
         int selectedId1 = readB.getId();
         readB = (RadioButton)findViewById(selectedId1);
@@ -75,8 +75,8 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         int selectedId4 = callB.getId();
         callB = (RadioButton)findViewById(selectedId4);
 
-       // makeText(PickUpActivity.this,
-               // readB.getText(), remindB.getText(), callB.getText(), writeB.getText()Toast.LENGTH_SHORT).show();
+       
+
 
 
 
@@ -115,7 +115,10 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         public void onClickR(View v){
-
+        if(v==nextbutton){
+            Intent i = new Intent(this, StartActivity.class);
+            startActivity(i);
+        }
 
         }
 
