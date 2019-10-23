@@ -75,7 +75,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         int selectedId4 = callB.getId();
         callB = (RadioButton)findViewById(selectedId4);
 
-       
+
 
 
 

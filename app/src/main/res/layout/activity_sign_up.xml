@@ -20,7 +20,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/signuphere"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -33,7 +33,7 @@
         android:layout_height="61dp"
         android:layout_margin="15dp"
         android:ems="10"
-        android:hint="Your Name Is"
+        android:hint="Your Email Is"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -45,6 +45,23 @@
         android:hint="Your ID Number is"
         android:inputType="textPassword" />
 
+    <TextView
+        android:id="@+id/writename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:text="Say Your Name Please"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/writename2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textSize="18dp" />
+
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="168dp"
@@ -52,15 +69,6 @@
         android:layout_gravity="center"
         android:layout_margin="25dp"
         android:hint="SignUp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttonLogIn"
-        android:layout_width="168dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:hint="SignIn"
         android:textStyle="bold" />
 
 </LinearLayout>

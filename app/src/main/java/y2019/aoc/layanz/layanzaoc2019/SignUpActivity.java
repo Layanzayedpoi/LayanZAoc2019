@@ -1,5 +1,6 @@
 package y2019.aoc.layanz.layanzaoc2019;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -29,9 +36,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
     Button buttonSignUp, buttonLogIn;
+
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_up);
         tvWelcom = (TextView) findViewById(R.id.tvWelcom);
         tvWelcom.setOnClickListener(this);
@@ -39,9 +50,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //2. initial;ize properties
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
-
-        buttonLogIn = findViewById(R.id.buttonLogIn);
-        buttonLogIn.setOnClickListener(this);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
 
@@ -70,6 +78,47 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+       // updateUI(currentUser);
+    }
+
+
+    public void signUp(String email, String password) {
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Intent i = new Intent(SignUpActivity.this, StartActivity.class);
+                            i.putExtra("Email", editTextEmail.getText().toString());
+                            i.putExtra("Password", editTextPassword.getText().toString());
+                            startActivity(i);
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("firebase", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                           // updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("firebase", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+
+    }
+
+
+
     private void ConvertTextToSpeech() {
         // TODO Auto-generated method stub
         text = arrSignUp[i];
@@ -83,6 +132,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
+
+
     @Override
     public void onClick(View v) {
         if(v == buttonSignUp) {
@@ -91,10 +142,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText( this, "Empty Email or Password", Toast.LENGTH_LONG).show();
             }
             else{
-                Intent i = new Intent(this, PickUpActivity.class);
-                i.putExtra("Email", editTextEmail.getText().toString());
-                i.putExtra("Password", editTextPassword.getText().toString());
-                startActivity(i);
+              signUp(editTextEmail.getText().toString(),editTextPassword.getText().toString());
+
             }
 
         }else if ( v == tvWelcom){

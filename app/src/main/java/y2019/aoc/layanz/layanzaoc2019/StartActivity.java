@@ -21,7 +21,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     TextToSpeech tts;
     String text;
     int i=0;
-    String[] arrStart= {"Hello Name", " Start Applcation"};
+    String[] arrStart= {"Hello", " Start Applcation"};
 
 
     @Override
