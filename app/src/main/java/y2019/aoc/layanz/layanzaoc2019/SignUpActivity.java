@@ -27,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private TextView tvWelcom;
+    private TextView tvWelcom, tvResult;
     TextToSpeech tts;
     String text;
     int i = 0;
@@ -42,9 +42,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_up);
+
+        mAuth = FirebaseAuth.getInstance();
+
         tvWelcom = (TextView) findViewById(R.id.tvWelcom);
+        tvWelcom.setOnClickListener(this);
+
+        tvResult = (TextView) findViewById(R.id.tvResult);
         tvWelcom.setOnClickListener(this);
 
         //2. initial;ize properties
@@ -155,30 +160,31 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
           //  startActivity(i);
         //}
     }
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
-                    String[] result = data.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS);
-                    tvWelcom.setText(0);
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    tvResult.setText(result.get(0));
                 }
                 break;
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public void getSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 10);
+        } else {
+            Toast.makeText(this, "Your Device Dont Support Speech Input", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
     public void getSTT(View view) throws InterruptedException {
         getSpeechInput();
         Thread.sleep(5000);
@@ -195,15 +201,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
         }
     }
-    public void getSpeechInput() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 10);
-        } else {
-            Toast.makeText(this, "Your Device Dont Support Speech Input", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }
 
