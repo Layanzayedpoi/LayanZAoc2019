@@ -27,15 +27,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private TextView tvWelcom, tvResult;
+    private TextView tvWelcom, tvResult, writename2;
     TextToSpeech tts;
     String text;
     int i = 0;
-    String[] arrSignUp = {"Welcome To Blink for more info click upper side of screen","Let's Sign Up Here", "Your Name is", "Your ID Number is","Sign Up" };
+    String[] arrSignUp = {"Welcome To Blink for more info click upper side of screen","Let's Sign Up Here", "Your Email Is", "Your ID Number is","Your Name is","Sign Up" };
+
 
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
-    Button buttonSignUp, buttonLogIn;
+    Button buttonSignUp;
 
     private FirebaseAuth mAuth;
 
@@ -51,6 +52,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         tvResult = (TextView) findViewById(R.id.tvResult);
         tvWelcom.setOnClickListener(this);
+
+        writename2 = findViewById(R.id.writename2);
+        writename2.setOnClickListener(this);
 
         //2. initial;ize properties
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -184,7 +188,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Your Device Dont Support Speech Input", Toast.LENGTH_SHORT).show();
         }
     }
-    
+
     public void getSTT(View view) throws InterruptedException {
         getSpeechInput();
         Thread.sleep(5000);
