@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -25,11 +26,11 @@ import java.util.Locale;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-
+    SharedPreferences pref;
+    private static final int SPEEK_TEXT = 10;
     private TextView tvWelcom, tvResult, writename2;
     TextToSpeech tts;
-    String text;
+    String text, name;
     int i = 0;
     String[] arrSignUp = {"Welcome To Blink for more info click upper side of screen","Let's Sign Up Here", "Your Email Is", "Your ID Number is","Your Name is","Sign Up" };
 
@@ -62,8 +63,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
 
-
-
+        pref=getSharedPreferences("mypref",MODE_PRIVATE );
 
 
         tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
@@ -158,53 +158,138 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else if ( v == tvWelcom){
             ConvertTextToSpeech();
         }
-      //  else{
-
-          //  Intent i = new Intent(this, HomePageActivity.class);
-          //  startActivity(i);
-        //}
     }
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 10:
+            case SPEEK_TEXT:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     tvResult.setText(result.get(0));
+                     name = result.get(0);
+                  SharedPreferences.Editor editor= pref.edit();
+                  editor.putString("name",name.toString().trim());
+                  editor.apply();
                 }
                 break;
         }
     }
 
-    public void getSpeechInput() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 10);
-        } else {
-            Toast.makeText(this, "Your Device Dont Support Speech Input", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void getSTT(View view) throws InterruptedException {
-        getSpeechInput();
-        Thread.sleep(5000);
-        getSpeechInput();
-    }
     public void getSpeechInput(View view){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
         if(intent.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(intent, 10);
+            //startActivityForResult(intent, 10);
+            startActivityForResult(intent, SPEEK_TEXT);
         }else{
             Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
         }
     }
 
+
+    public static int getSpeekText() {
+        return SPEEK_TEXT;
+    }
+
+    public TextView getTvWelcom() {
+        return tvWelcom;
+    }
+
+    public TextView getTvResult() {
+        return tvResult;
+    }
+
+    public TextView getWritename2() {
+        return writename2;
+    }
+
+    public TextToSpeech getTts() {
+        return tts;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getI() {
+        return i;
+    }
+
+    public String[] getArrSignUp() {
+        return arrSignUp;
+    }
+
+    public EditText getEditTextEmail() {
+        return editTextEmail;
+    }
+
+    public EditText getEditTextPassword() {
+        return editTextPassword;
+    }
+
+    public Button getButtonSignUp() {
+        return buttonSignUp;
+    }
+
+    public FirebaseAuth getmAuth() {
+        return mAuth;
+    }
+
+
+    public void setTvWelcom(TextView tvWelcom) {
+        this.tvWelcom = tvWelcom;
+    }
+
+    public void setTvResult(TextView tvResult) {
+        this.tvResult = tvResult;
+    }
+
+    public void setWritename2(TextView writename2) {
+        this.writename2 = writename2;
+    }
+
+    public void setTts(TextToSpeech tts) {
+        this.tts = tts;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public void setArrSignUp(String[] arrSignUp) {
+        this.arrSignUp = arrSignUp;
+    }
+
+    public void setEditTextEmail(EditText editTextEmail) {
+        this.editTextEmail = editTextEmail;
+    }
+
+    public void setEditTextPassword(EditText editTextPassword) {
+        this.editTextPassword = editTextPassword;
+    }
+
+    public void setButtonSignUp(Button buttonSignUp) {
+        this.buttonSignUp = buttonSignUp;
+    }
+
+    public void setmAuth(FirebaseAuth mAuth) {
+        this.mAuth = mAuth;
+    }
 }
 

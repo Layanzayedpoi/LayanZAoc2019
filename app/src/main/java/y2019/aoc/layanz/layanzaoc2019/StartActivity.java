@@ -3,7 +3,9 @@ package y2019.aoc.layanz.layanzaoc2019;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -21,6 +23,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     TextToSpeech tts;
     String text;
     int i=0;
+
+    String name="";
+
     String[] arrStart= {"Hello" , " Start Applcation"};
 
 
@@ -28,7 +33,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+     //name =SharedPreferences.getString("name","");
 
+        //name = getSharedPreferences("name",);
 
 
         TextView start;
@@ -54,6 +61,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         });
 
     }
+
+
     private void ConvertTextToSpeech() {
         // TODO Auto-generated method stub
         text = arrStart[i];
