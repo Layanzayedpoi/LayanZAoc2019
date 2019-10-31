@@ -3,6 +3,7 @@ package y2019.aoc.layanz.layanzaoc2019;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -63,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
 
-        pref=getSharedPreferences("mypref",MODE_PRIVATE );
+        pref=getSharedPreferences("mypref", MODE_PRIVATE );
 
 
         tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
@@ -170,8 +171,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     tvResult.setText(result.get(0));
                      name = result.get(0);
                   SharedPreferences.Editor editor= pref.edit();
-                  editor.putString("name",name.toString().trim());
-                  editor.apply();
+                  editor.putString("name","gadgetsaint");
+                  editor.commit();
                 }
                 break;
         }

@@ -23,19 +23,17 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     TextToSpeech tts;
     String text;
     int i=0;
-
-    String name="";
-
-    String[] arrStart= {"Hello" , " Start Applcation"};
+    String name;
+    String[] arrStart= {"Hello"+name , " Start Applcation"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-     //name =SharedPreferences.getString("name","");
 
-        //name = getSharedPreferences("name",);
+
+        name = getSharedPreferences("mypref", MODE_PRIVATE ).getString("name","");
 
 
         TextView start;
