@@ -171,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     tvResult.setText(result.get(0));
                      name = result.get(0);
                   SharedPreferences.Editor editor= pref.edit();
-                  editor.putString("name","gadgetsaint");
+                  editor.putString("name",name);
                   editor.commit();
                 }
                 break;
@@ -190,6 +190,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
         }
     }
+/*
 
 
     public static int getSpeekText() {
@@ -292,5 +293,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void setmAuth(FirebaseAuth mAuth) {
         this.mAuth = mAuth;
     }
+*/
 }
 

@@ -24,7 +24,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     String text;
     int i=0;
     String name;
-    String[] arrStart= {"Hello"+name , " Start Applcation"};
+    String[] arrStart = new String[2];
 
 
     @Override
@@ -35,7 +35,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         name = getSharedPreferences("mypref", MODE_PRIVATE ).getString("name","");
 
-
+        arrStart[0]= "Hello"+name;
+        arrStart[1] = " Start Applcation";
         TextView start;
 
         tts=new TextToSpeech(StartActivity.this, new TextToSpeech.OnInitListener() {
@@ -72,7 +73,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             text = "Content not available";
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }else
-            tts.speak(text+"is saved", TextToSpeech.QUEUE_FLUSH, null);
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
 
