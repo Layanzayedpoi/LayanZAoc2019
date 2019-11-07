@@ -38,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
-    Button buttonSignUp;
+    Button buttonSignUp, buttonlogin;
 
     private FirebaseAuth mAuth;
 
@@ -63,6 +63,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
+        buttonlogin = findViewById(R.id.buttonlogin);
+        buttonlogin.setOnClickListener(this);
 
         pref=getSharedPreferences("mypref", MODE_PRIVATE );
 

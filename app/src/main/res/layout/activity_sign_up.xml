@@ -80,6 +80,14 @@
         android:hint="SignUp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/buttonlogin"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="login" />
+
     <TextView
         android:id="@+id/tvResult"
         android:layout_width="match_parent"
