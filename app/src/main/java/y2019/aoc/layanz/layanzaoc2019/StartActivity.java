@@ -19,6 +19,7 @@ import java.util.Locale;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int SPEEK_TEXT = 10;
     Button buttonStart;
     TextToSpeech tts;
     String text;
