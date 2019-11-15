@@ -4,6 +4,7 @@ package y2019.aoc.layanz.layanzaoc2019;
 
 
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.Manifest;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
+
+    Button buttongotosignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             //Check that the lockscreen is secured//
             if (!keyguardManager.isKeyguardSecure()) {
                 // If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
+                textView.setTextSize(15);
                 textView.setText("Please enable lockscreen security in your device's Settings");
             } else {
                 try {
@@ -179,4 +184,6 @@ public class MainActivity extends AppCompatActivity {
             super(e);
         }
     }
+
+    Intent i = new Intent(MainActivity.this, SignUpActivity.class);
 }
