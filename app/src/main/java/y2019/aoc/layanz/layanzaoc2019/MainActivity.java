@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -45,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
 
+
     Button buttongotosignup;
+    TextToSpeech tts;
+    String text;
+    int i = 0;
+    String[] arrFinger = {"WE have here fingerprint auothontication" ,"press your finger at the buutom of the screen","if you already have an account please press 2 times at the upper right side of the screen"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,24 @@ public class MainActivity extends AppCompatActivity {
                     (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
             textView = (TextView) findViewById(R.id.textview);
+
+
+
+           // private void ConvertTextToSpeech() {
+                // TODO Auto-generated method stub
+               // text = arrFinger[i];
+               // i++;
+              //  if(i == arrFinger.length - 1)
+                    i=0;
+              //  if(text==null||"".equals(text))
+              //  {
+              //      text = "Content not available";
+             //       tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+             //   }else
+              //      tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+          //  }
+
+
 
             //Check whether the device has a fingerprint sensor//
             if (!fingerprintManager.isHardwareDetected()) {
@@ -185,5 +210,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+
+
+    public void onClick(View v){
+        if(v ==  buttongotosignup){
+            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+        }
+    }
+
 }

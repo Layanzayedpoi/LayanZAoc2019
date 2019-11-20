@@ -69,27 +69,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         pref=getSharedPreferences("mypref", MODE_PRIVATE );
 
 
-        tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
+       tts=new TextToSpeech(SignUpActivity.this, new TextToSpeech.OnInitListener() {
 
-            @Override
-            public void onInit(int status) {
-                // TODO Auto-generated method stub
-                if(status == TextToSpeech.SUCCESS){
-                    int result=tts.setLanguage(Locale.US);
-                    if(result==TextToSpeech.LANG_MISSING_DATA ||
-                            result==TextToSpeech.LANG_NOT_SUPPORTED){
-                        Log.e("error", "This Language i-s not supported");
-                    }
-                    else{
-                        ConvertTextToSpeech();
-                    }
+        @Override
+        public void onInit(int status) {
+            // TODO Auto-generated method stub
+            if(status == TextToSpeech.SUCCESS){
+                int result=tts.setLanguage(Locale.US);
+                if(result==TextToSpeech.LANG_MISSING_DATA ||
+                        result==TextToSpeech.LANG_NOT_SUPPORTED){
+                    Log.e("error", "This Language i-s not supported");
                 }
-                else
-                    Log.e("error", "Initilization Failed!");
+                else{
+                    ConvertTextToSpeech();
+                }
             }
-        });
+            else
+                Log.e("error", "Initilization Failed!");
+        }
+    });
 
-    }
+}
 
     @Override
     public void onStart() {
