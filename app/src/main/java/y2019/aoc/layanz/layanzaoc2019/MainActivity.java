@@ -13,10 +13,13 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -27,6 +30,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.Locale;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
+    private static final int SPEEK_TEXT = 10;
 
 
     Button buttongotosignup;
@@ -72,19 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-           // private void ConvertTextToSpeech() {
-                // TODO Auto-generated method stub
-               // text = arrFinger[i];
-               // i++;
-              //  if(i == arrFinger.length - 1)
-                    i=0;
-              //  if(text==null||"".equals(text))
-              //  {
-              //      text = "Content not available";
-             //       tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-             //   }else
-              //      tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-          //  }
 
 
 
@@ -212,10 +204,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void onClick(View v){
-        if(v ==  buttongotosignup){
-            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+    public void getSpeechInput(View view){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if(intent.resolveActivity(getPackageManager()) != null){
+            //startActivityForResult(intent, 10);
+            startActivityForResult(intent, SPEEK_TEXT);
+        }else{
+            Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
         }
     }
-
 }

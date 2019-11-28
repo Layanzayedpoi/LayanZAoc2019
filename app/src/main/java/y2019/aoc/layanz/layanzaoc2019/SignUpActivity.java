@@ -164,6 +164,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
