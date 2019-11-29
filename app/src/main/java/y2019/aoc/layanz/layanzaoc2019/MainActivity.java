@@ -53,16 +53,36 @@ public class MainActivity extends AppCompatActivity {
     private static final int SPEEK_TEXT = 10;
 
 
-    Button buttongotosignup;
+    Button buttomgotosignup;
     TextToSpeech tts;
     String text;
     int i = 0;
-    String[] arrFinger = {"WE have here fingerprint auothontication" ,"press your finger at the buutom of the screen","if you already have an account please press 2 times at the upper right side of the screen"};
+    String[] arrFinger = {"WE have here fingerprint auothontication", "press your finger at the buutom of the screen", "if you already have an account please press 2 times at the upper right side of the screen"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
+
+            @Override
+            public void onInit(int status) {
+                // TODO Auto-generated method stub
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.US);
+                    if (result == TextToSpeech.LANG_MISSING_DATA ||
+                            result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("error", "This Language i-s not supported");
+                    } else {
+                        ConvertTextToSpeech();
+                    }
+                } else
+                    Log.e("error", "Initilization Failed!");
+            }
+        });
+
 
         // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
         // or higher before executing any fingerprint-related code
@@ -74,10 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
             textView = (TextView) findViewById(R.id.textview);
-
-
-
-
 
 
             //Check whether the device has a fingerprint sensor//
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
 //Create the generateKey method that we’ll use to gain access to the Android keystore and generate the encryption key//
 
     private void generateKey() throws FingerprintException {
@@ -165,6 +182,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void ConvertTextToSpeech() {
+        // TODO Auto-generated method stub
+        text = arrFinger[i];
+        i++;
+        if (i == arrFinger.length - 1)
+            i = 0;
+        if (text == null || "".equals(text)) {
+            text = "Content not available";
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        } else
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+
     //Create a new method that we’ll use to initialize our cipher//
     public boolean initCipher() {
         try {
@@ -203,17 +234,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void getSpeechInput(View view){
+    public void getSpeechInput(View view) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
-        if(intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             //startActivityForResult(intent, 10);
             startActivityForResult(intent, SPEEK_TEXT);
-        }else{
+        } else {
             Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
         }
+
     }
-}
+
+    public void onClick(View v) {
+     if(v== buttomgotosignup){
+         Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+     }
+
+            }
+
+
+
+    }
+
