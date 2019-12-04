@@ -39,7 +39,7 @@ import javax.crypto.SecretKey;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Declare a string variable for the key we’re going to use in our fingerprint authentication
     private static final String KEY_NAME = "yourKey";
@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        buttomgotosignup = findViewById(R.id.buttomgotosignup);
+        buttomgotosignup.setOnClickListener( this);
 
 
         tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
@@ -227,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class FingerprintException extends Exception {
+    protected class FingerprintException extends Exception {
         public FingerprintException(Exception e) {
             super(e);
         }
@@ -251,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
      if(v== buttomgotosignup){
          Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+         startActivity(i);
      }
 
             }
