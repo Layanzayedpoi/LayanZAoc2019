@@ -5,67 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="25dp"
     android:background="@drawable/bg9"
     tools:context=".SignUpActivity">
 
     <TextView
         android:id="@+id/tvWelcom"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Welcome To Blink"
         android:textSize="25dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/signuphere"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Sign Up Here:"
-        android:textSize="15dp" />
-
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="315dp"
-        android:layout_height="61dp"
-        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:ems="10"
         android:hint="Your Email Is"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="320dp"
-        android:layout_height="61dp"
-        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:ems="10"
         android:hint="Your ID Number is"
         android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/writename"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:padding="10dp"
-        android:text="Say Your Name Please"
-        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/writename2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:padding="5dp"
+        android:hint="Say Your Name Please"
+        android:padding="10dp"
         android:textSize="18dp" />
 
     <ImageView
         android:id="@+id/speak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:background="?selectableItemBackground"
         android:onClick="getSpeechInput"
@@ -73,26 +56,16 @@
 
     <Button
         android:id="@+id/buttonSignUp"
-        android:layout_width="168dp"
-        android:layout_height="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="25dp"
         android:hint="SignUp"
         android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttonlogin"
-        android:layout_width="193dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="login" />
 
     <TextView
         android:id="@+id/tvResult"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:text="TextView" />
+        android:layout_height="wrap_content" />
 
 
 
@@ -108,17 +81,17 @@
     <TextView
         android:id="@+id/textview"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="FingerPrint "
-        android:textSize="35dp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="221dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_margin="50dp"
@@ -126,46 +99,4 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="144dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="false"
-        android:layout_margin="0dp"
-        android:gravity="center"
-        android:text="@android:string/fingerprint_icon_content_description"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="57dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView"
-        android:gravity="center"
-        android:text="please set your finger at the buttom of the phone"
-        android:textSize="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" />
-
-    <Button
-        android:id="@+id/buttomgotosignup"
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="SignUp" />
 </LinearLayout>

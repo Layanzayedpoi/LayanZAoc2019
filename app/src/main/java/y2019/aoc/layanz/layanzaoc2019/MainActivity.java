@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    protected class FingerprintException extends Exception {
+    protected static class FingerprintException extends Exception {
         public FingerprintException(Exception e) {
             super(e);
         }

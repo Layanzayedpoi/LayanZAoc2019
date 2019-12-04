@@ -23,37 +23,43 @@
             android:text="Pick Your Options"
             android:textSize="40dp" />
 
-        <RadioButton
-            android:id="@+id/buttonreadmessages"
+        <RadioGroup
+            android:id="@+id/radioGPick"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="25dp"
-            android:text="Read My Messages"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/buttonwritemytext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="25dp"
-            android:text="Write My Texts"
-            android:textSize="20dp" />
+            <RadioButton
+                android:id="@+id/buttonreadmessages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:text="Read My Messages"
+                android:textSize="20dp" />
 
-        <RadioButton
-            android:id="@+id/buttonremindme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="25dp"
-            android:text="Remind Me"
-            android:textSize="20dp" />
+            <RadioButton
+                android:id="@+id/buttonwritemytext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:text="Write My Texts"
+                android:textSize="20dp" />
 
-        <RadioButton
-            android:id="@+id/buttoncallforem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="25dp"
-            android:text="Call For Emergency"
-            android:textSize="20dp" />
+            <RadioButton
+                android:id="@+id/buttonremindme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:text="Remind Me"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/buttoncallforem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:text="Call For Emergency"
+                android:textSize="20dp" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/nextbutton"

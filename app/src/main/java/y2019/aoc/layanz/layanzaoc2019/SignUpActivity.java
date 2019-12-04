@@ -94,9 +94,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
-        buttonlogin = findViewById(R.id.buttonlogin);
-        buttonlogin.setOnClickListener(this);
-
         pref = getSharedPreferences("mypref", MODE_PRIVATE);
 
 
@@ -209,11 +206,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    protected class FingerprintException extends Exception {
-        public FingerprintException(Exception e) {
-            super(e);
-        }
-    }
 
     @Override
     public void onStart() {
@@ -253,7 +245,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-
+    protected class FingerprintException extends Exception {
+        public FingerprintException(Exception e) {
+            super(e);
+        }
+    }
 
     private void generateKey() throws MainActivity.FingerprintException {
         try {
