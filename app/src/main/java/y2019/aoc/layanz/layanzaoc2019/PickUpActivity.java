@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,16 +21,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.Policy;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener {
 
+    SharedPreferfnces pref;
+    private TextView tvResult;
+    private static final int SPEEK_TEXT = 10;
     private RadioButton readB;
     private RadioButton writeB;
     private RadioButton remindB;
     private RadioButton callB;
     private RadioGroup radioGroup;
     private Button NextB;
+    String Police, Ambulance, FireFighting;
+
 
     TextToSpeech tts;
     TextView tvPickUp;
@@ -53,6 +61,8 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
         NextB = (Button) findViewById(R.id.nextbutton);
         NextB.setOnClickListener(this);//msh 3arfe eza s7
+
+        pref = getSharedPreferences("mypref", MODE_PRIVATE);
 
 
         radioGroup = findViewById(R.id.radioGPick);
@@ -150,6 +160,22 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             default:
+                break;
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SPEEK_TEXT:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    tvResult.setText(result.get(0));
+                    Police= result.get(0);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("name", Police);
+                    editor.commit();
+                }
                 break;
         }
     }
