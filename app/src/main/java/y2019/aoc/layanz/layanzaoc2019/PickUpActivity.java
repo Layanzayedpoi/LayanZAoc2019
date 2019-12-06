@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.security.Policy;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -106,6 +108,19 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+   // firebase
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        // updateUI(currentUser);
+    }
+
+    public void PickUp(){ }
+
+
+
+    //text to speach
     private void ConvertTextToSpeech() {
         // TODO Auto-generated method stub
         text = arrPickUp[i];
