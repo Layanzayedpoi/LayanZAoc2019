@@ -21,15 +21,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.security.Policy;
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class PickUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    SharedPreferfnces pref;
+  //  SharedPreferfnces pref;
     private TextView tvResult;
     private static final int SPEEK_TEXT = 10;
     private RadioButton readB;
@@ -38,8 +38,9 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
     private RadioButton callB;
     private RadioGroup radioGroup;
     private Button NextB;
-    String Police, Ambulance, FireFighting;
+    int option=0;
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     TextToSpeech tts;
     TextView tvPickUp;
@@ -62,23 +63,22 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         callB = (RadioButton) findViewById(R.id.buttoncallforem);
 
         NextB = (Button) findViewById(R.id.nextbutton);
-        NextB.setOnClickListener(this);//msh 3arfe eza s7
-
-        pref = getSharedPreferences("mypref", MODE_PRIVATE);
-
+     //   NextB.setOnClickListener(this);//msh 3arfe eza s7
 
         radioGroup = findViewById(R.id.radioGPick);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-            //    Toast.makeText(getApplicationContext(), checkedId+": id", Toast.LENGTH_LONG).show();
                 switch(checkedId){
                     case R.id.buttonreadmessages:
-
+                        break;
                     case R.id.buttonwritemytext:
+                        break;
                     case R.id.buttonremindme:
+                        break;
                     case R.id.buttoncallforem:
-                        callForEmergency(0);
+                        String arr = "If you want to call emergency Please say police ambulance or Fireservices";
+                       emergeyncyOption(arr);
                         break;
                 }
 
@@ -87,6 +87,26 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    public void emergeyncyOption(final String text){
+        tts = new TextToSpeech(PickUpActivity.this, new TextToSpeech.OnInitListener() {
+
+            @Override
+            public void onInit(int status) {
+                // TODO Auto-generated method stub
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.US);
+                    if (result == TextToSpeech.LANG_MISSING_DATA ||
+                            result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("error", "This Language i-s not supported");
+                    } else {
+                        ConvertTextToSpeech(text);
+                    }
+                } else
+                    Log.e("error", "Initilization Failed!");
+            }
+        });
+        callForEmergency(0);
+    }
     public void onClick(View v) {
 
         tts = new TextToSpeech(PickUpActivity.this, new TextToSpeech.OnInitListener() {
@@ -100,7 +120,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                             result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("error", "This Language i-s not supported");
                     } else {
-                        ConvertTextToSpeech();
+                        ConvertTextToSpeech(arrPickUp[0]);
                     }
                 } else
                     Log.e("error", "Initilization Failed!");
@@ -116,17 +136,13 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         // updateUI(currentUser);
     }
 
-    public void PickUp(){ }
-
-
 
     //text to speach
-    private void ConvertTextToSpeech() {
+    private void ConvertTextToSpeech(String text) {
         // TODO Auto-generated method stub
-        text = arrPickUp[i];
-        i++;
-        if (i == arrPickUp.length - 1)
-            i = 0;
+        //text = arr[i];
+       // i++;
+
         if (text == null || "".equals(text)) {
             text = "Content not available";
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
@@ -134,12 +150,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    public void getSpeechInput(View view) {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
 
-    }
     public void callForEmergency(int option){
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
 
@@ -168,7 +179,7 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
 
             case 123:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    callForEmergency(0);
+                    callForEmergency(option);
                 } else {
                     Log.d("TAG", "Call Permission Not Granted");
                 }
@@ -179,6 +190,20 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+
+    public void getSpeechInput(View view) {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            //startActivityForResult(intent, 10);
+            startActivityForResult(intent, SPEEK_TEXT);
+        } else {
+            Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
+        }
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
@@ -186,10 +211,13 @@ public class PickUpActivity extends AppCompatActivity implements View.OnClickLis
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     tvResult.setText(result.get(0));
-                    Police= result.get(0);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("name", Police);
-                    editor.commit();
+                    if(result.get(0).equals("police")){
+                        option = 0;
+                    }else
+                        if(result.get(0).equals("ambulance"))
+                            option = 1;
+                        else
+                            option = 2;
                 }
                 break;
         }
