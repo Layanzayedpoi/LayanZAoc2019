@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="y2019.aoc.layanz.layanzaoc2019">
 
-    <uses-feature android:name="android.hardware.fingerprint"
-        android:required="true"/>
-    <uses-permission
-        android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogInActivity"></activity>
-
+        <activity android:name=".ReadMyMessActivity"></activity>
+        <activity android:name=".LogInActivity" />
         <activity android:name=".PicListActivity" />
         <activity android:name=".MoreInfoActivity" />
         <activity android:name=".MainActivity" />
@@ -32,5 +26,12 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="true" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
 </manifest>
