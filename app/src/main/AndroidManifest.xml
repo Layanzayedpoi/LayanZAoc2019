@@ -13,12 +13,12 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".PicListActivity" />
         <activity android:name=".MoreInfoActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".PickUpActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".StartActivity" />
         <activity android:name=".HomePageActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".PickUpActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

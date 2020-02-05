@@ -66,7 +66,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private KeyguardManager keyguardManager;
 
 
-
     //1. properties defenition
     EditText editTextEmail, editTextPassword;
     Button buttonSignUp, buttonlogin;
@@ -168,9 +167,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         }
-
-
-
 
 
     }
@@ -306,7 +302,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
     //
     @Override
     public void onClick(View v) {
@@ -321,6 +316,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if (v == tvWelcom) {
             ConvertTextToSpeech();
         }
+
+        if(v== buttonSignUp){
+            Intent i = new Intent(SignUpActivity.this, StartActivity.class);
+            startActivity(i);
+        }
+
     }
 
 
@@ -352,4 +353,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Doesn't support Speech to text", Toast.LENGTH_LONG).show();
         }
     }
+
 }
