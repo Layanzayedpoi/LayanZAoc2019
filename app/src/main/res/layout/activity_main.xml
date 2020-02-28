@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/custom_background"
     tools:context=".MainActivity">
 
 
@@ -21,12 +22,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="221dp"
+        android:layout_width="205dp"
+        android:layout_height="202dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_margin="50dp"
-        app:srcCompat="@drawable/bg"
+        app:srcCompat="@drawable/bjFP"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="144dp" />
 
@@ -70,6 +72,7 @@
         android:id="@+id/buttomgotosignup"
         android:layout_width="154dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="SignUp" />
 
